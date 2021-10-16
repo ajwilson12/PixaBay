@@ -1,0 +1,29 @@
+.display {
+    width: 100%;
+    padding: 10px 0 0 0;
+    text-align: center;
+}
+
+#facts {
+    width: 100%;
+    padding: 20px;
+    text-align: justify;
+    text-align-last: left;
+}
+
+.previewImg:hover{
+    opacity: 0.8;
+}
+
+.userProfilePic{
+    width:40px;
+    border-radius: 50%;
+    margin-right: 5px;
+
+}
+
+.flex{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
