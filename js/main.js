@@ -122,7 +122,7 @@ function displayData(data){
 
 
                         <!-- Button to activate modal -->
-                        <button onclick="${insertImage(imgURL)}" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <button onclick="insertImage('${String(imgURL)}')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         See Full Size
                         </button>
   
