@@ -15,10 +15,9 @@
 
 <body>
     <div class="container">
-        <div id="test"></div>
         <h1 class="display-4 text-center">PixaBay Search</h1>
         <input id="searchBox" class="form-control form-control-lg" type="text" placeholder="Search..." aria-label="Search Box">
-        <button id="searchButton" type="button" class="btn btn-primary w-100 mt-2 mb-2">Search</button>
+        <button id="searchButton" type="button" class="btn btn-primary w-100 mt-2 mb-2"><img id="searchIcon" src="./img/search.png"></img></button>
         <div id="alert"></div>
         
         <img id="display" src=""></img>
@@ -39,23 +38,31 @@
         
         <div id="pagination"></div>
 
-                              <!-- Modal -->
-                              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div id="modalImage" class="modal-body"></div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                     
-                                    </div>
-                                    </div>
-                                </div>
-                                </div>
+        <!-- <div>Icons made by <a href="https://www.flaticon.com/authors/ayub-irawan" title="Ayub Irawan">Ayub Irawan</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
+        <div>Icons made by <a href="https://www.flaticon.com/authors/pavel-kozlov" title="Pavel Kozlov">Pavel Kozlov</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
 
     </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen-down modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div id="modalImage"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 </body>
 </html>
+

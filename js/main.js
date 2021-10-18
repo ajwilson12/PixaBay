@@ -8,34 +8,31 @@ const displayImage = document.getElementById('display')
 const alertText = document.getElementById('alert')
 const pagination = document.getElementById('pagination')
 let modalImage = document.getElementById('modalImage')
-let pageNumber = 2
-
+let pageNumber = 1
+let query = ""
 
 searchButton.addEventListener('click', function () {
-
-    const query = searchBox.value 
-    if(query == ""){
-        alertText.innerHTML = `<div class="alert alert-danger" role="alert">
-        Type something in the search bar.
-      </div>`
-    } else {
-    searchPixaBay(query)
-    alertText.innerHTML = ""
-    }
-
+    searchPixaBay()
 })
 
+function searchTag(tag) {
+  searchBox.value = tag
+  searchPixaBay()
+}
 
-
-async function searchPixaBay(query) {
-
-    let perPage = perPageElement.value
-    const res = await fetch(`https://pixabay.com/api/?key=${apiKey}&q=${query}&per_page=${perPage}&page=`)
-    const json = await res.json()
-    url = res.url
+async function searchPixaBay(URLpageNumber) {
+    if(query != searchBox.value){
+      pageNumber = 1
+    }
     
+    query = searchBox.value 
+    let perPage = perPageElement.value
+    const res = await fetch(`https://pixabay.com/api/?key=${apiKey}&q=${query}&per_page=${perPage}&page=${URLpageNumber}`)
+    const json = await res.json()
+    console.log(json)
+    url = res.url
+    console.log(url)
     resultsDiv.innerHTML = ''  
-    pageNumber = 2
 
     if(json.totalHits == 0){
         alertText.innerHTML = `<div class="alert alert-danger" role="alert">
@@ -56,36 +53,24 @@ async function searchPixaBay(query) {
           <li class="page-item"><a class="page-link" href="#" onclick="nextPageBtn(url + pageNumber)">Next</a></li>
         </ul>
       </nav>`
-    console.log(json)
-    console.log(url)
 }
 
-async function nextPageBtn(url) {
-    const res = await fetch(url)
-    const json = await res.json()
-    resultsDiv.innerHTML = ''
-    pageNumber+=1
-    displayData(json);
+// pagination navigation functions
+
+function nextPageBtn() {
+    pageNumber++
+    searchPixaBay(pageNumber)
     console.log(pageNumber)
 }
-async function prevPageBtn(url) {
-    const res = await fetch(url)
-    const json = await res.json()
-    resultsDiv.innerHTML = ''
+function prevPageBtn() {
+    
     pageNumber--
-    displayData(json);
+    searchPixaBay(pageNumber)
     console.log(pageNumber);
-}
-
-async function numPageBtn(url) {
-    const res = await fetch(url)
-    const json = await res.json()
-    resultsDiv.innerHTML = ''
-    displayData(json);
-    console.log(pageNumber);
-}
+    } 
 
 
+// display cards
 
 function displayData(data){
     data.hits.forEach(imageData => {
@@ -106,29 +91,23 @@ function displayData(data){
         let imgCard = 
             `<div class="col-4 p-1">
                 <div class="card">
-                    <a href="${imgURL}" target="_blank"><img src="${img}" class="card-img-top previewImg" alt="..."></a>
+                <a onclick="insertImage('${String(imgURL)}')" data-bs-toggle="modal" data-bs-target="#exampleModal"><img src="${img}" class="card-img-top previewImg" alt="..."></a>
 
                         <div class="card-body">
  
                             <div id="test2" class="card-text">${createButton(tagSingle)}</div>
 
-                            <div class="flex">
-                            <img class="userProfilePic"src="${userProfilePic}"></img>
-                            <a href="https://pixabay.com/users/${user}" target="_blank"><h6 class="card-title">${user}</h6></a>
-                            </div>
+                                <div class="flex">
+                                    <img class="userProfilePic"src="${userProfilePic}"></img>
+                                    <a href="https://pixabay.com/users/${user}" target="_blank"><h6 class="card-title">${user}</h6></a>
+                                </div>
 
                             <p class="card-text">Views: ${views}</p>
                             <p class="card-text">Likes: ${likes}</p>
 
-
-                        <!-- Button to activate modal -->
-                        <button onclick="insertImage('${String(imgURL)}')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        See Full Size
-                        </button>
-  
+                            </div>
                     </div>
-                </div>
-            </div>`;
+                </div>`;
 
 
         resultsDiv.insertAdjacentHTML('beforeend',imgCard) 
@@ -140,25 +119,34 @@ function displayData(data){
 
 function insertImage(imgURL){
 console.log(imgURL)
-     modalImage.innerHTML = `<img src="${imgURL}"></img>`   
+     modalImage.innerHTML = `<img src="${imgURL}" class="img-fluid"></img>`   
 }
 
 
-// pagination functions
+
+// create tag buttons
 
 function createButton(b){
     let btn = ''
 for (var i = 0; i < b.length; i++) {
-    btn += `<button class="btn btn-primary m-1" onclick="searchPixaBay('${String(b[i])}')" value=${b[i]}>${b[i]}</button>`;
+    btn += `<button class="btn btn-primary m-1" onclick="searchTag('${String(b[i])}')" value=${b[i]}>${b[i]}</button>`;
   }
   return btn;
 }
 
-function createPageNumbers(total, perPage){
-    total = Math.ceil(total/perPage+1)
+// pagination functions
+
+function createPageNumbers(totalHits, perPage){
+    totalHits = Math.ceil(totalHits/perPage+1)
     pagi = ""
-for (var i=1; i<total; i++){
-    pagi += `<li class="page-item"><a class="page-link" href="#" onclick="numPageBtn(url + ${[i]})">${[i]}</a></li>`
+for (var i=1; i<totalHits; i++){
+    pagi += `<li class="page-item"><a class="page-link" href="#" onclick="searchPixaBay(value(${[i]}))">${[i]}</a></li>`
+    
 }
 return pagi;
+}
+
+function value(i){
+    pageNumber = i
+    return i
 }
