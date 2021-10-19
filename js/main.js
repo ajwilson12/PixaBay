@@ -15,16 +15,12 @@ searchButton.addEventListener('click', function () {
     searchPixaBay()
 })
 
-function searchTag(tag) {
-  searchBox.value = tag
-  searchPixaBay()
-}
 
 async function searchPixaBay(URLpageNumber) {
     if(query != searchBox.value){
       pageNumber = 1
     }
-    
+    console.log(pageNumber)
     query = searchBox.value 
     let perPage = perPageElement.value
     const res = await fetch(`https://pixabay.com/api/?key=${apiKey}&q=${query}&per_page=${perPage}&page=${URLpageNumber}`)
@@ -40,6 +36,7 @@ async function searchPixaBay(URLpageNumber) {
       </div>`
     } else {
     displayData(json);
+    alertText.innerHTML = ""
     }
 
     // pagination
@@ -60,13 +57,10 @@ async function searchPixaBay(URLpageNumber) {
 function nextPageBtn() {
     pageNumber++
     searchPixaBay(pageNumber)
-    console.log(pageNumber)
 }
 function prevPageBtn() {
-    
     pageNumber--
     searchPixaBay(pageNumber)
-    console.log(pageNumber);
     } 
 
 
@@ -81,7 +75,7 @@ function displayData(data){
         let views = imageData.views
         let likes = imageData.likes
         let imgURL = imageData.largeImageURL
-        let tagSingle = tags.split(",")
+        let tagSingle = tags.split(", ")
 
         if(userProfilePic == ""){
             userProfilePic = "../img/noPic.jpg"
@@ -90,21 +84,26 @@ function displayData(data){
           
         let imgCard = 
             `<div class="col-4 p-1">
-                <div class="card">
-                <a onclick="insertImage('${String(imgURL)}')" data-bs-toggle="modal" data-bs-target="#exampleModal"><img src="${img}" class="card-img-top previewImg" alt="..."></a>
+                <div>
+                    <div class="card">
+                        <a class="overlay" onclick="insertImage('${String(imgURL)}')" data-bs-toggle="modal" data-bs-target="#exampleModal">
 
+                        <img src="./img/enlarge.png" class="imageIcon center"alt="">
+                            
+                        <p><img src="./img/view.png" class="imageIcon"alt="">: ${views}
+                            
+                        <img src="./img/like.png" class="imageIcon"alt="">: ${likes}</p>
+                        </a>
+                    <img src="${img}" class="card-img-top previewImg" alt="...">
+                </div>
                         <div class="card-body">
  
                             <div id="test2" class="card-text">${createButton(tagSingle)}</div>
 
-                                <div class="flex">
+                                <div class="userFlex">
                                     <img class="userProfilePic"src="${userProfilePic}"></img>
                                     <a href="https://pixabay.com/users/${user}" target="_blank"><h6 class="card-title">${user}</h6></a>
                                 </div>
-
-                            <p class="card-text">Views: ${views}</p>
-                            <p class="card-text">Likes: ${likes}</p>
-
                             </div>
                     </div>
                 </div>`;
@@ -122,14 +121,19 @@ console.log(imgURL)
      modalImage.innerHTML = `<img src="${imgURL}" class="img-fluid"></img>`   
 }
 
+// search tag function
 
+function searchTag(tag) {
+    searchBox.value = tag
+    searchPixaBay()
+  }
 
 // create tag buttons
 
 function createButton(b){
     let btn = ''
 for (var i = 0; i < b.length; i++) {
-    btn += `<button class="btn btn-primary m-1" onclick="searchTag('${String(b[i])}')" value=${b[i]}>${b[i]}</button>`;
+    btn += `<button class="btn btn-primary m-1 text-capitalize" onclick="searchTag('${String(b[i])}')" value=${b[i]}>${b[i]}</button>`;
   }
   return btn;
 }
@@ -150,3 +154,4 @@ function value(i){
     pageNumber = i
     return i
 }
+
