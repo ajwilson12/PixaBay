@@ -1,4 +1,26 @@
-const apiKey = '23829158-8e5b8c65dfcd19ccf0c91c5c8'
+const settingsBtn = document.getElementById('settingsButton')
+const settingsText = document.getElementById('settingsText')
+
+settingsBtn.addEventListener('click', function(){
+    settingsBtn.classList.add('flipSettings')
+    settingsText.style.display = "none"
+    settingsText.style.opacity = 0
+    perPageElement.style.display = "inline"
+})
+settingsBtn.addEventListener('mouseout', function(){
+    settingsBtn.classList.remove('flipSettings')
+    settingsText.style.display = "none"
+    settingsText.style.opacity = 0
+    perPageElement.style.display = "none"
+})
+settingsBtn.addEventListener('mouseover', function(){
+    settingsText.style.display = "inline"
+    settingsText.style.opacity = 1
+    settingsText.style.animation = "fadeIn linear 0.2s";   
+})
+
+
+const apiKey = '23829158-8e5b8c65dfcd19ccf0c91c5c8';
 const searchBox = document.getElementById("searchBox");
 const searchButton = document.getElementById("searchButton");
 const resultsDiv = document.getElementById("results")
@@ -17,42 +39,59 @@ searchButton.addEventListener('click', function () {
 
 
 async function searchPixaBay(URLpageNumber) {
-    if(query != searchBox.value){
-      pageNumber = 1
+    if (query != searchBox.value) {
+        pageNumber = 1
     }
     console.log(pageNumber)
-    query = searchBox.value 
+    query = searchBox.value
     let perPage = perPageElement.value
     const res = await fetch(`https://pixabay.com/api/?key=${apiKey}&q=${query}&per_page=${perPage}&page=${URLpageNumber}`)
     const json = await res.json()
     console.log(json)
     url = res.url
     console.log(url)
-    resultsDiv.innerHTML = ''  
+    resultsDiv.innerHTML = ''
 
-    if(json.totalHits == 0){
+    if (json.totalHits == 0) {
         alertText.innerHTML = `<div class="alert alert-danger" role="alert">
         Sorry, no results found...
       </div>`
     } else {
-    displayData(json);
-    alertText.innerHTML = ""
+        displayData(json);
+        alertText.innerHTML = ""
     }
 
     // pagination
     pagination.innerHTML = `<div class="pagination"></div>
     <nav aria-label="Page navigation example">
         <ul class="pagination">
-          <li class="page-item"><a class="page-link" onclick="prevPageBtn(url + pageNumber)">Previous</a></li>
+
+          ${displayPrevBtn()}
         
           ${createPageNumbers(json.totalHits, perPage)}
+          
+          ${displayNextBtn(json.totalHits, perPage)}
 
-          <li class="page-item"><a class="page-link" href="#" onclick="nextPageBtn(url + pageNumber)">Next</a></li>
         </ul>
       </nav>`
 }
 
 // pagination navigation functions
+
+function displayPrevBtn() {
+    if (pageNumber <= 1){
+       return `<li class="page-item"><a class="page-link">Previous</a></li>`
+    } else {
+       return `<li class="page-item"><a class="page-link"  href="#" onclick="prevPageBtn(url + pageNumber)">Previous</a></li>`
+    }
+}
+function displayNextBtn(totalHits, perPage) {
+    if (pageNumber >= Math.ceil(totalHits / perPage)){
+       return `<li class="page-item"><a class="page-link">Next</a></li>`
+    } else {
+       return `<li class="page-item"><a class="page-link" href="#" onclick="nextPageBtn(url + pageNumber)">Next</a></li>`
+    }
+}
 
 function nextPageBtn() {
     pageNumber++
@@ -61,15 +100,15 @@ function nextPageBtn() {
 function prevPageBtn() {
     pageNumber--
     searchPixaBay(pageNumber)
-    } 
+}
 
 
 // display cards
 
-function displayData(data){
+function displayData(data) {
     data.hits.forEach(imageData => {
         let img = imageData.previewURL
-        let tags =imageData.tags
+        let tags = imageData.tags
         let userProfilePic = imageData.userImageURL
         let user = imageData.user
         let views = imageData.views
@@ -80,15 +119,15 @@ function displayData(data){
         if(userProfilePic == ""){
             userProfilePic = "../img/noPic.jpg"
         }
-        
-          
-        let imgCard = 
+
+
+        let imgCard =
             `<div class="col-4 p-1">
-                <div>
+                <div class="displayCard">
                     <div class="card">
                         <a class="overlay" onclick="insertImage('${String(imgURL)}')" data-bs-toggle="modal" data-bs-target="#exampleModal">
 
-                        <img src="./img/enlarge.png" class="imageIcon center"alt="">
+                        <img id="zoomIcon" src="./img/enlarge.png" alt="">
                             
                         <p><img src="./img/view.png" class="imageIcon"alt="">: ${views}
                             
@@ -109,16 +148,16 @@ function displayData(data){
                 </div>`;
 
 
-        resultsDiv.insertAdjacentHTML('beforeend',imgCard) 
-        
-    });        
+        resultsDiv.insertAdjacentHTML('beforeend', imgCard)
+
+    });
 }
 
 // modal image function
 
-function insertImage(imgURL){
-console.log(imgURL)
-     modalImage.innerHTML = `<img src="${imgURL}" class="img-fluid"></img>`   
+function insertImage(imgURL) {
+    console.log(imgURL)
+    modalImage.innerHTML = `<img src="${imgURL}" class="img-fluid"></img>`
 }
 
 // search tag function
@@ -126,32 +165,42 @@ console.log(imgURL)
 function searchTag(tag) {
     searchBox.value = tag
     searchPixaBay()
-  }
+}
 
 // create tag buttons
 
-function createButton(b){
+function createButton(b) {
     let btn = ''
-for (var i = 0; i < b.length; i++) {
-    btn += `<button class="btn btn-primary m-1 text-capitalize" onclick="searchTag('${String(b[i])}')" value=${b[i]}>${b[i]}</button>`;
-  }
-  return btn;
+    for (var i = 0; i < b.length; i++) {
+        btn += `<button class="btn btn-primary m-1 text-capitalize" onclick="searchTag('${String(b[i])}')" value=${b[i]}>${b[i]}</button>`;
+    }
+    return btn;
 }
 
 // pagination functions
 
-function createPageNumbers(totalHits, perPage){
-    totalHits = Math.ceil(totalHits/perPage+1)
+function createPageNumbers(totalHits, perPage) {
+    totalHits = Math.ceil(totalHits / perPage + 1)
     pagi = ""
-for (var i=1; i<totalHits; i++){
-    pagi += `<li class="page-item"><a class="page-link" href="#" onclick="searchPixaBay(value(${[i]}))">${[i]}</a></li>`
-    
-}
-return pagi;
+    for (var i = 1; i < totalHits; i++) {
+        if (i == pageNumber) {
+            pagi += `<li id="${i}" class="page-item active"><a class="page-link" href="#" onclick="searchPixaBay(value(${[i]}))">${[i]}</a></li>`
+        } else {
+            pagi += `<li id="${i}" class="page-item"><a class="page-link" href="#" onclick="searchPixaBay(value(${[i]}))">${[i]}</a></li>`
+        }
+    }
+    return pagi;
 }
 
-function value(i){
+function value(i) {
     pageNumber = i
     return i
+}
+
+function paginationCurrentPage(i) {
+    let current = document.getElementsById(i)
+    if (current.value == pageNumber) {
+        current.classList.add('active')
+    }
 }
 

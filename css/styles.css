@@ -1,22 +1,31 @@
-/* search icon */
+
+
+
+/* search box */
 
 #searchBox{
+    width: 100%;
     border-width: 0px 0px 1px 0px;
     animation: fadeIn linear 1s;
 }
-
-@keyframes fadeIn {
-    0% {opacity:0;}
-    100% {opacity:1;}
-  }
 
 #searchBox:focus{
     outline: none;
 }
 
-/* searchButton */
 
+.flex{
+    max-width: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* menu buttons */
 .menuButton{
+    background: rgba(11, 101, 247, 0.2);
     box-sizing: border-box;
     clip-path: circle(45%);
     opacity: 1;
@@ -24,11 +33,11 @@
     transition: 0.1s;
     padding: 8px 10px;
     align-items: center;
-    border: none;
-    
+    border: none;   
 }
 
 .menuButton:hover {
+    background: rgba(11, 101, 247, 0.6);
     clip-path: none;
     transition: 0.1s;
     padding-right: 67px;
@@ -40,16 +49,89 @@
     transition: 0.1s;
     padding-left: 23px;
     margin-bottom: 3px;
-
 }
+#settingsButton:hover{
+    padding-right: 78px;
+}
+#settingsButton:hover > span{
+    padding-left: 26px;
+}
+
+#settingsText{
+    pointer-events: none;
+}
+
+.flipSettings {
+    transform: rotateX(180deg);
+    transition: transform 0.4s;
+    perspective: 1000px;
+    clip-path: none;
+    padding-right: 78px;
+    border-radius: 20px;
+}
+
+#perPage{
+    display: none;
+    transform: rotateX(180deg);
+    height: 20px;
+    font-size: 12px;
+    width: 38px;
+    border-radius: 10px;
+    margin-left: 5px;
+    pointer-events: none;
+}
+
+
 
 .menuButton span{
     opacity: 0;
     position: absolute;
 }
 
-#searchIcon{
+.menuIcon{
     width: 20px; 
+}
+/* menuIcon animation */
+@keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+
+#settingsIcon{
+    transform: rotate(0deg);
+    transition: transform 0.4s;
+    pointer-events: none;
+}
+.menuButton:hover > #settingsIcon{
+    transform: rotate(120deg);
+    transition: transform 0.5s;
+}
+
+#searchIcon{
+    transform: rotateY(0deg);
+    transition: transform 0.5s;
+}
+.menuButton:hover > #searchIcon{
+    transform: rotateY(180deg);
+    transition: transform 0.3s;
+}
+
+
+/* cards */
+
+.card{
+    border: none;
+}
+
+.displayCard{
+    transform: scale(0.9);
+    transition: transform 0.3s;
+    box-shadow: 0px 0px 0 0 #888888;
+}
+.displayCard:hover {
+    transform: scale(0.91);
+    transition: transform 0.4s;
+    box-shadow:2px 2px 10px 1px rgb(236, 236, 236);
 }
 
 .userProfilePic{
@@ -59,16 +141,15 @@
 
 }
 
-.flex{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .userFlex{
     display: flex;
     justify-content: flex-start;
     align-items: center;
+}
+.userFlex h6{
+
+    margin-top: 15px;
+    margin-left: 2px;
 }
 
 .overlay{
@@ -81,11 +162,12 @@
     color: whitesmoke;
     justify-content: center;
     transition: 0.2s;
+    cursor: pointer;
 }
 
 .overlay:hover{
     opacity: 1;
-    transition: 0.2s;
+    transition: 0.4s;
 }
 
 .overlay p {
@@ -96,6 +178,19 @@
 
 .imageIcon{
     width: 30px;
+}
+
+#zoomIcon{
+    width:5px;
+    height: 5px;
+    transition: all .3s ease-in;
+    position: absolute;
+    left: 11px;
+    top: 10px;
+}
+
+.overlay:hover > #zoomIcon{
+     transform: scale(4); 
 }
 
 .center{
