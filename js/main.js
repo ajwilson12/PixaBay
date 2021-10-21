@@ -2,7 +2,6 @@ const apiKey = '23829158-8e5b8c65dfcd19ccf0c91c5c8';
 const searchBox = document.getElementById("searchBox");
 const searchButton = document.getElementById("searchButton");
 const resultsDiv = document.getElementById("results")
-const backBtn = document.getElementById("back")
 const perPageElement = document.getElementById("perPage")
 const displayImage = document.getElementById('display')
 const alertText = document.getElementById('alert')
@@ -28,8 +27,19 @@ async function searchPixaBay(URLpageNumber) {
     console.log(json)
     url = res.url
     console.log(url)
-    resultsDiv.innerHTML = ''
 
+
+    // sorting function that works some how
+    var sortLikes = json.hits
+    const mostLikes = sortLikes.sort(function (b, a) {
+        return a.likes - b.likes
+    })
+        
+        console.log(mostLikes);
+
+
+    resultsDiv.innerHTML = ''
+    
     if (json.totalHits == 0) {
         alertText.innerHTML = `<div class="alert alert-danger" role="alert">
         Sorry, no results found...
@@ -39,42 +49,36 @@ async function searchPixaBay(URLpageNumber) {
         alertText.innerHTML = ""
     }
 
+// pagination
+    pagination.innerHTML =
 
-    
-
-
-
-
-
-    // pagination
-    pagination.innerHTML = `<div class="pagination"></div>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-
-          ${displayPrevBtn()}
-        
-          ${createPageNumbers(json.totalHits, perPage)}
-          
-          ${displayNextBtn(json.totalHits, perPage)}
-
-        </ul>
-      </nav>`
+    `<div="wrap">
+    <div class="paginationFlexbox">
+        ${displayPrevBtn()}
+            <div class ="scrollBox">
+                <div class ="paginationBtnWrapper">
+                    ${createPageNumbers(json.totalHits, perPage)}
+                </div>
+            </div>
+        ${displayNextBtn(json.totalHits, perPage)}
+        </div>
+        </div>`
 }
 
 // pagination navigation functions
 
 function displayPrevBtn() {
     if (pageNumber <= 1){
-       return `<li class="page-item"><a class="page-link">Previous</a></li>`
+       return `<a>Previous</a>`
     } else {
-       return `<li class="page-item"><a class="page-link"  href="#" onclick="prevPageBtn(url + pageNumber)">Previous</a></li>`
+       return `<a href="#" onclick="prevPageBtn(url + pageNumber)">Previous</a>`
     }
 }
 function displayNextBtn(totalHits, perPage) {
     if (pageNumber >= Math.ceil(totalHits / perPage)){
-       return `<li class="page-item"><a class="page-link">Next</a></li>`
+       return `<a>Next</a>`
     } else {
-       return `<li class="page-item"><a class="page-link" href="#" onclick="nextPageBtn(url + pageNumber)">Next</a></li>`
+       return `<a href="#" onclick="nextPageBtn(url + pageNumber)">Next</a>`
     }
 }
 
@@ -100,7 +104,7 @@ function displayData(data) {
         let likes = imageData.likes
         let imgURL = imageData.largeImageURL
         let tagSingle = tags.split(", ")
-
+ 
         if(userProfilePic == ""){
             userProfilePic = "../img/noPic.jpg"
         }
@@ -168,9 +172,9 @@ function createPageNumbers(totalHits, perPage) {
     pagi = ""
     for (var i = 1; i < totalHits; i++) {
         if (i == pageNumber) {
-            pagi += `<li id="${i}" class="page-item active"><a class="page-link" href="#" onclick="searchPixaBay(value(${[i]}))">${[i]}</a></li>`
+            pagi += `<li id="${i}" class="pageBtn active"><a href="#" onclick="searchPixaBay(value(${[i]}))">${[i]}</a></li>`
         } else {
-            pagi += `<li id="${i}" class="page-item"><a class="page-link" href="#" onclick="searchPixaBay(value(${[i]}))">${[i]}</a></li>`
+            pagi += `<li id="${i}" class="pageBtn"><a  href="#" onclick="searchPixaBay(value(${[i]}))">${[i]}</a></li>`
         }
     }
     return pagi;
@@ -196,8 +200,4 @@ function paginationCurrentPage(i) {
 
 // console.log(result);
 
-function sortViews(views){
-    const result = views.sort(function (a, b) {
-        return a.likes - b.likes})
-        console.log(result);
-}
+
