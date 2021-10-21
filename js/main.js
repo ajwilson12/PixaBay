@@ -1,25 +1,3 @@
-const settingsBtn = document.getElementById('settingsButton')
-const settingsText = document.getElementById('settingsText')
-
-settingsBtn.addEventListener('click', function(){
-    settingsBtn.classList.add('flipSettings')
-    settingsText.style.display = "none"
-    settingsText.style.opacity = 0
-    perPageElement.style.display = "inline"
-})
-settingsBtn.addEventListener('mouseout', function(){
-    settingsBtn.classList.remove('flipSettings')
-    settingsText.style.display = "none"
-    settingsText.style.opacity = 0
-    perPageElement.style.display = "none"
-})
-settingsBtn.addEventListener('mouseover', function(){
-    settingsText.style.display = "inline"
-    settingsText.style.opacity = 1
-    settingsText.style.animation = "fadeIn linear 0.2s";   
-})
-
-
 const apiKey = '23829158-8e5b8c65dfcd19ccf0c91c5c8';
 const searchBox = document.getElementById("searchBox");
 const searchButton = document.getElementById("searchButton");
@@ -60,6 +38,13 @@ async function searchPixaBay(URLpageNumber) {
         displayData(json);
         alertText.innerHTML = ""
     }
+
+
+    
+
+
+
+
 
     // pagination
     pagination.innerHTML = `<div class="pagination"></div>
@@ -119,7 +104,6 @@ function displayData(data) {
         if(userProfilePic == ""){
             userProfilePic = "../img/noPic.jpg"
         }
-
 
         let imgCard =
             `<div class="col-4 p-1">
@@ -204,3 +188,16 @@ function paginationCurrentPage(i) {
     }
 }
 
+// const people = ['{name: "Fred", likes: 2}', { name: "Ben", likes: 10 }, { name: "Bob", likes: 5 }];
+
+// const result = people.sort(function (a, b) {
+// return a.likes - b.likes
+// })
+
+// console.log(result);
+
+function sortViews(views){
+    const result = views.sort(function (a, b) {
+        return a.likes - b.likes})
+        console.log(result);
+}

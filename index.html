@@ -21,26 +21,21 @@
         <h1 class="display-4 text-center">PixaBay Search</h1>
         <div class="flex">
         <input id="searchBox" class="bg-transparent" type="text" placeholder="Search..." aria-label="Search Box">
-
-        <button id="searchButton" type="button" class="btn menuButton"><img id="searchIcon" class="menuIcon" src="./img/search.png"></img><span>Search</span></button>
-        
-        
-        <button id="settingsButton" type="button" class="btn menuButton"> 
-          <img id="settingsIcon" class="menuIcon" src="./img/settings-cog.png"></img><span id="settingsText">Settings</span>        
-            <select id="perPage">
-              <option value="12">12</option>
-              <option value="24">24</option>
-              <option value="36">36</option>
-              <option value="48">48</option>
-              <option value="60">60</option>
-              <option value="120">120</option>
-              <option value="200">200</option>
-            </select>
-          </div>
-        </button>
+        <button id="searchButton" type="button" class="btn btn-primary menuButton"><img id="searchIcon" src="./img/search.png"></img><span>Search</span></button>
+        <button id="settingsButton" type="button" class="btn btn-primary menuButton"><img id="settingsIcon" src="./img/settings-cog.png"></img><span>Settings</span></button>
 
         <div id="back"></div>
+        <select id="perPage">
+            <option value="12">12</option>
+            <option value="24">24</option>
+            <option value="36">36</option>
+            <option value="48">48</option>
+            <option value="60">60</option>
+            <option value="120">120</option>
+            <option value="200">200</option>
+        </select>
 
+      </div>
         <div id="alert"></div>
         
         <img id="display" src=""></img>
@@ -78,4 +73,3 @@
 
 </body>
 </html>
-
