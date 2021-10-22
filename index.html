@@ -24,21 +24,41 @@
         <button id="searchButton" type="button" class="btn btn-primary menuButton"><img id="searchIcon" src="./img/search.png"></img><span>Search</span></button>
         <button id="settingsButton" type="button" class="btn btn-primary menuButton"><img id="settingsIcon" src="./img/settings-cog.png"></img><span>Settings</span></button>
 
-        <div id="back"></div>
-        <select id="perPage">
-            <option value="12">12</option>
-            <option value="24">24</option>
-            <option value="36">36</option>
-            <option value="48">48</option>
-            <option value="60">60</option>
-            <option value="120">120</option>
-            <option value="200">200</option>
-        </select>
 
       </div>
         <div id="alert"></div>
         
         <img id="display" src=""></img>
+
+        <div id="settingsContainer">
+  
+          <div id="back"></div>
+          <select id="perPage">
+              <option value="12">12</option>
+              <option value="24">24</option>
+              <option value="36">36</option>
+              <option value="48">48</option>
+              <option value="60">60</option>
+              <option value="120">120</option>
+              <option value="200">200</option>
+          </select>
+        
+          <label class="sortResults">Popular
+            <input id='popular' type="radio" name="radio" checked="checked">
+            <span class="checkmark"></span>
+          </label>
+        
+          <label class="sortResults">Most Likes
+            <input id='mostLikes' type="radio" name="radio">
+            <span class="checkmark"></span>
+          </label>
+        
+          <label class="sortResults">Most Views 
+            <input id='mostViews' type="radio" name="radio">
+            <span class="checkmark"></span>
+          </label>
+          <button id="closeBtn">X</button>
+        </div>  
 
         <!-- next back buttons -->
 

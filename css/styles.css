@@ -206,4 +206,9 @@
 }
 
 
-
+#settingsContainer{
+    display: flex;
+    visibility: hidden;
+    justify-content: center;
+    opacity: 0;
+}

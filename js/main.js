@@ -1,17 +1,35 @@
 const apiKey = '23829158-8e5b8c65dfcd19ccf0c91c5c8';
 const searchBox = document.getElementById("searchBox");
 const searchButton = document.getElementById("searchButton");
+const settingsButton = document.getElementById("settingsButton");
+const settingsContainer = document.getElementById("settingsContainer");
+const closeBtn = document.getElementById("closeBtn")
 const resultsDiv = document.getElementById("results")
 const perPageElement = document.getElementById("perPage")
 const displayImage = document.getElementById('display')
 const alertText = document.getElementById('alert')
 const pagination = document.getElementById('pagination')
 let modalImage = document.getElementById('modalImage')
+let mostLikes = document.getElementById('mostLikes')
+let mostViews = document.getElementById('mostViews')
 let pageNumber = 1
 let query = ""
 
 searchButton.addEventListener('click', function () {
     searchPixaBay()
+})
+settingsButton.addEventListener('click', function () {
+    settingsContainer.style.visibility = "visible"
+    settingsContainer.style.transition = "0.3s"
+    settingsContainer.style.opacity = 1
+    settingsButton.style.background = "#198754"
+    
+
+})
+closeBtn.addEventListener('click', function () {
+    settingsContainer.style.opacity = 0
+    settingsContainer.style.visibility = "hidden"
+    settingsButton.style.background = "#0d6efd"
 })
 
 
@@ -28,14 +46,13 @@ async function searchPixaBay(URLpageNumber) {
     url = res.url
     console.log(url)
 
-
-    // sorting function that works some how
-    var sortLikes = json.hits
-    const mostLikes = sortLikes.sort(function (b, a) {
-        return a.likes - b.likes
-    })
-        
-        console.log(mostLikes);
+// sorting functions
+    if(mostViews.checked){
+        sortByHighViews(json.hits)
+    }
+    else if(mostLikes.checked){
+        sortByHighLikes(json.hits)
+    }
 
 
     resultsDiv.innerHTML = ''
@@ -201,3 +218,23 @@ function paginationCurrentPage(i) {
 // console.log(result);
 
 
+function sortByHighViews(json){
+    json.sort(function (b, a) {
+        return a.views - b.views
+        })
+    }
+    function sortByLowViews(json){
+    json.sort(function (a, b) {
+        return a.views - b.views
+        })
+    }
+    function sortByHighLikes(json){
+    json.sort(function (b, a) {
+        return a.likes - b.likes
+        })
+    }
+    function sortByLowLikes(json){
+    json.sort(function (a, b) {
+        return a.likes - b.likes
+        })
+    }
