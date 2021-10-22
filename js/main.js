@@ -1,5 +1,6 @@
 const apiKey = '23829158-8e5b8c65dfcd19ccf0c91c5c8';
 const searchBox = document.getElementById("searchBox");
+const landingWrapper = document.getElementById("landingWrapper");
 const searchButton = document.getElementById("searchButton");
 const settingsButton = document.getElementById("settingsButton");
 const settingsContainer = document.getElementById("settingsContainer");
@@ -22,14 +23,14 @@ settingsButton.addEventListener('click', function () {
     settingsContainer.style.visibility = "visible"
     settingsContainer.style.transition = "0.3s"
     settingsContainer.style.opacity = 1
-    settingsButton.style.background = "#198754"
+    settingsButton.style.background = "#0d6efd"
     
 
 })
 closeBtn.addEventListener('click', function () {
     settingsContainer.style.opacity = 0
     settingsContainer.style.visibility = "hidden"
-    settingsButton.style.background = "#0d6efd"
+    settingsButton.style.background = "#fff"
 })
 
 
@@ -45,6 +46,13 @@ async function searchPixaBay(URLpageNumber) {
     console.log(json)
     url = res.url
     console.log(url)
+
+
+
+    landingWrapper.classList.remove('landingScreen')
+
+
+console.log(json.totalHits)
 
 // sorting functions
     if(mostViews.checked){
@@ -138,7 +146,7 @@ function displayData(data) {
                             
                         <img src="./img/like.png" class="imageIcon"alt="">: ${likes}</p>
                         </a>
-                    <img src="${img}" class="card-img-top previewImg" alt="...">
+                    <img src="${img}" class="card-img-top rounded previewImg" alt="...">
                 </div>
                         <div class="card-body">
  
@@ -177,7 +185,7 @@ function searchTag(tag) {
 function createButton(b) {
     let btn = ''
     for (var i = 0; i < b.length; i++) {
-        btn += `<button class="btn btn-primary m-1 text-capitalize" onclick="searchTag('${String(b[i])}')" value=${b[i]}>${b[i]}</button>`;
+        btn += `<button class="btn m-1 text-capitalize" onclick="searchTag('${String(b[i])}')" value=${b[i]}>${b[i]}</button>`;
     }
     return btn;
 }

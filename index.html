@@ -17,12 +17,13 @@
 
 <body>
     <div class="container">
-      
-        <h1 class="display-4 text-center">PixaBay Search</h1>
+      <div class="spacer"></div>
+      <div id="landingWrapper" class="landingScreen">
+        <h1 class="display-4 text-center">PixaBay</h1>
         <div class="flex">
-        <input id="searchBox" class="bg-transparent" type="text" placeholder="Search..." aria-label="Search Box">
-        <button id="searchButton" type="button" class="btn btn-primary menuButton"><img id="searchIcon" src="./img/search.png"></img><span>Search</span></button>
-        <button id="settingsButton" type="button" class="btn btn-primary menuButton"><img id="settingsIcon" src="./img/settings-cog.png"></img><span>Settings</span></button>
+        <input id="searchBox" type="text" placeholder="Search..." aria-label="Search Box">
+        <button id="searchButton" type="button" class="btn menuButton"><img id="searchIcon" src="./img/search.png"></img><span>Search</span></button>
+        <button id="settingsButton" type="button" class="btn menuButton"><img id="settingsIcon" src="./img/settings-cog.png"></img><span>Settings</span></button>
 
 
       </div>
@@ -32,7 +33,7 @@
 
         <div id="settingsContainer">
   
-          <div id="back"></div>
+          
           <select id="perPage">
               <option value="12">12</option>
               <option value="24">24</option>
@@ -59,7 +60,7 @@
           </label>
           <button id="closeBtn">X</button>
         </div>  
-
+      </div>
         <!-- next back buttons -->
 
         <div id="results" class="row"></div>
