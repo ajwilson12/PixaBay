@@ -46,6 +46,7 @@ h1{
     width: 100%;
     padding: 5px 15px;
     border-radius: 30px;
+    margin-right: 3px;
 }
 
 @keyframes fadeIn {
@@ -90,6 +91,8 @@ h1{
     transition: 0.1s;
     padding-right: 67px;
     border-radius: 20px;
+    margin-left: 2px;
+    margin-right: 2px;
 }
 
 .menuButton:hover > span {
