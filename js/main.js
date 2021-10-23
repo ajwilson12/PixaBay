@@ -143,9 +143,13 @@ function displayData(data) {
         }
 
         let imgCard =
-            `<div class="col-4 p-1">
+            `<div class="customColumn">
                 <div class="displayCard">
+        
                     <div class="card">
+
+                    <a class="userName" href="https://pixabay.com/users/${user}" target="_blank"><p class="card-title">${user}</p></a>
+                    
                         <a class="overlay" onclick="insertImage('${String(imgURL)}')" data-bs-toggle="modal" data-bs-target="#exampleModal">
 
                         <img id="zoomIcon" src="./img/enlarge.png" alt="">
@@ -153,17 +157,19 @@ function displayData(data) {
                         <p><img src="./img/view.png" class="imageIcon"alt="">: ${views}
                             
                         <img src="./img/like.png" class="imageIcon"alt="">: ${likes}</p>
+                        <img class="userProfilePic"src="${userProfilePic}"></img>
                         </a>
+                        
                     <img src="${img}" class="rounded previewImg" alt="...">
                 </div>
                         <div class="card-body">
  
                             <div id="test2" class="card-text">${createButton(tagSingle)}</div>
 
-                                <div class="userFlex">
-                                    <img class="userProfilePic"src="${userProfilePic}"></img>
-                                    <a href="https://pixabay.com/users/${user}" target="_blank"><p class="card-title">${user}</p></a>
-                                </div>
+                             
+
+                             
+                                
                             </div>
                     </div>
                 </div>`;

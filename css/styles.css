@@ -33,7 +33,7 @@ body {
 }
 
 #landingWrapper.is-pinned {
-    background:#100138;
+    background:rgba(16, 1, 56, 0.9);
     align-items: center;
     border-radius: 0 0 5px 5px;
   } 
@@ -167,6 +167,36 @@ h1{
 
 
 /*  card */
+.customRow {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+}
+
+.customColumn {
+    flex: 33%;
+    max-width: 33%;
+    padding: 0 4px;
+}
+  
+.customColumn .displayCard {
+    margin-top: 8px;
+    vertical-align: middle;
+    width: 100%;
+}
+@media screen and (max-width: 950px) {
+    .customColumn {
+        flex: 50%;
+        max-width: 50%;
+    }
+}
+  
+@media screen and (max-width: 600px) {
+    .customColumn {
+        flex: 100%;
+        max-width: 100%;
+    }
+}
 
 #resultsWrapper{
     padding-left: 20px;
@@ -197,7 +227,7 @@ h1{
     text-decoration: none;
     background: rgb(225, 232, 245);
     border-radius: 5px;
-    display: inline-block;
+    display: block;
     padding: 4px 10px;
     text-align: center;
     color: #040016;
@@ -206,16 +236,29 @@ h1{
 .tagButton:hover{
     background: #100138;
     transition: 0.2s;
-    transform: scale(1.1);
-    transform: translateY(-4px);
-
+    transform: scale(1.05);
 }
 
 .userProfilePic{
-    width:40px;
+    width:30px;
     border-radius: 50%;
-    margin-right: 5px;
+    position: absolute;
+    left: 5px;
+    top:5px;
+    transform: scale(1);
+    transition: transform 0.3s;
+    z-index: 2;
 
+}
+.userProfilePic:hover{
+    transform: scale(4);
+    transition: transform 0.3s;
+}
+
+.userName{
+    position: absolute;
+    z-index: 1;
+    bottom: 5px;
 }
 
 .flex{
@@ -228,11 +271,7 @@ h1{
     margin-bottom: 10px;
 }
 
-.userFlex{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
+
 
 .overlay{
     display: flex;
@@ -255,7 +294,9 @@ h1{
 .overlay p {
     color: whitesmoke;
     position: absolute;
-    bottom: 0;
+    bottom: -15px;
+    right: 10px;
+    pointer-events: none;
 }
 
 .imageIcon{
@@ -267,7 +308,7 @@ h1{
     height: 5px;
     transition: all .3s ease-in;
     position: absolute;
-    left: 11px;
+    right: 11px;
     top: 10px;
 }
 .overlay:hover > #zoomIcon{
