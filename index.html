@@ -18,53 +18,57 @@
 <body>
     <div class="container">
       <div class="spacer"></div>
+      <h1 id="searchHeading" class="display-4 text-center">PixaBay</h1>
       <div id="landingWrapper" class="landingScreen">
-        <h1 class="display-4 text-center">PixaBay</h1>
+        <h1 id="welcomeHeading" class="display-4 text-center">PixaBay</h1>
+        
         <div class="flex">
-        <input id="searchBox" type="text" placeholder="Search..." aria-label="Search Box">
-        <button id="searchButton" type="button" class="btn menuButton"><img id="searchIcon" src="./img/search.png"></img><span>Search</span></button>
-        <button id="settingsButton" type="button" class="btn menuButton"><img id="settingsIcon" src="./img/settings-cog.png"></img><span>Settings</span></button>
+          <input id="searchBox" type="text" placeholder="Search..." aria-label="Search Box">
+          <button id="searchButton" type="button" class="btn menuButton"><img id="searchIcon" src="./img/search.png"></img><span>Search</span></button>
+          <button id="settingsButton" type="button" class="btn menuButton"><img id="settingsIcon" src="./img/settings-cog.png"></img><span>Settings</span></button>
+
+          <div id="settingsContainer">
+  
+          <p>Display:</p>
+            <select id="perPage">
+                <option value="12">12</option>
+                <option value="24">24</option>
+                <option value="36">36</option>
+                <option value="48">48</option>
+                <option value="60">60</option>
+                <option value="120">120</option>
+                <option value="200">200</option>
+            </select>
+            <p>Sort By:</p>
+            <label class="sortResults"><img class="filterIcon"src="./img/star.png">
+              <input id='popular' type="radio" name="radio" checked="checked">
+              <span class="checkmark"></span>
+            </label>
+          
+            <label class="sortResults"><img class="filterIcon"src="./img/like.png">
+              <input id='mostLikes' type="radio" name="radio">
+              <span class="checkmark"></span>
+            </label>
+          
+            <label class="sortResults"><img class="filterIcon"src="./img/view.png"> 
+              <input id='mostViews' type="radio" name="radio">
+              <span class="checkmark"></span>
+            </label>
+            <button id="closeBtn">X</button>
+          </div>
 
 
-      </div>
+        </div>
         <div id="alert"></div>
         
         <img id="display" src=""></img>
-
-        <div id="settingsContainer">
-  
-          
-          <select id="perPage">
-              <option value="12">12</option>
-              <option value="24">24</option>
-              <option value="36">36</option>
-              <option value="48">48</option>
-              <option value="60">60</option>
-              <option value="120">120</option>
-              <option value="200">200</option>
-          </select>
-        
-          <label class="sortResults">Popular
-            <input id='popular' type="radio" name="radio" checked="checked">
-            <span class="checkmark"></span>
-          </label>
-        
-          <label class="sortResults">Most Likes
-            <input id='mostLikes' type="radio" name="radio">
-            <span class="checkmark"></span>
-          </label>
-        
-          <label class="sortResults">Most Views 
-            <input id='mostViews' type="radio" name="radio">
-            <span class="checkmark"></span>
-          </label>
-          <button id="closeBtn">X</button>
-        </div>  
       </div>
-        <!-- next back buttons -->
 
-        <div id="results" class="row"></div>
-        
+
+        <!-- next back buttons -->
+        <div id="resultsWrapper">
+          <div id="results" class="row"></div>
+        </div>
         <div id="pagination"></div>
 
         <!-- <div>Icons made by <a href="https://www.flaticon.com/authors/ayub-irawan" title="Ayub Irawan">Ayub Irawan</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>

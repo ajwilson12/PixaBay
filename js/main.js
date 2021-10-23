@@ -1,6 +1,7 @@
 const apiKey = '23829158-8e5b8c65dfcd19ccf0c91c5c8';
 const searchBox = document.getElementById("searchBox");
 const landingWrapper = document.getElementById("landingWrapper");
+const welcomeHeading = document.getElementById("welcomeHeading");
 const searchButton = document.getElementById("searchButton");
 const settingsButton = document.getElementById("settingsButton");
 const settingsContainer = document.getElementById("settingsContainer");
@@ -33,6 +34,13 @@ closeBtn.addEventListener('click', function () {
     settingsButton.style.background = "#fff"
 })
 
+const observer = new IntersectionObserver( 
+  ([e]) => e.target.classList.toggle("is-pinned", e.intersectionRatio < 1),
+  { threshold: [1] }
+);
+
+observer.observe(landingWrapper);
+
 
 async function searchPixaBay(URLpageNumber) {
     if (query != searchBox.value) {
@@ -50,7 +58,7 @@ async function searchPixaBay(URLpageNumber) {
 
 
     landingWrapper.classList.remove('landingScreen')
-
+    welcomeHeading.style.display="none"
 
 console.log(json.totalHits)
 
@@ -146,7 +154,7 @@ function displayData(data) {
                             
                         <img src="./img/like.png" class="imageIcon"alt="">: ${likes}</p>
                         </a>
-                    <img src="${img}" class="card-img-top rounded previewImg" alt="...">
+                    <img src="${img}" class="rounded previewImg" alt="...">
                 </div>
                         <div class="card-body">
  
@@ -154,7 +162,7 @@ function displayData(data) {
 
                                 <div class="userFlex">
                                     <img class="userProfilePic"src="${userProfilePic}"></img>
-                                    <a href="https://pixabay.com/users/${user}" target="_blank"><h6 class="card-title">${user}</h6></a>
+                                    <a href="https://pixabay.com/users/${user}" target="_blank"><p class="card-title">${user}</p></a>
                                 </div>
                             </div>
                     </div>
@@ -185,7 +193,7 @@ function searchTag(tag) {
 function createButton(b) {
     let btn = ''
     for (var i = 0; i < b.length; i++) {
-        btn += `<button class="btn m-1 text-capitalize" onclick="searchTag('${String(b[i])}')" value=${b[i]}>${b[i]}</button>`;
+        btn += `<a class="tagButton m-1 text-capitalize" href="#" onclick="searchTag('${String(b[i])}')" value=${b[i]}>${b[i]}</a>`;
     }
     return btn;
 }
