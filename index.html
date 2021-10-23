@@ -28,8 +28,9 @@
           <button id="settingsButton" type="button" class="btn menuButton"><img id="settingsIcon" src="./img/settings-cog.png"></img><span>Settings</span></button>
 
           <div id="settingsContainer">
-  
-          <p>Display:</p>
+            <div class="settingsFirsLine">
+            <div class="displayFlex">
+          <p>Display: &nbsp;</p>
             <select id="perPage">
                 <option value="12">12</option>
                 <option value="24">24</option>
@@ -39,7 +40,27 @@
                 <option value="120">120</option>
                 <option value="200">200</option>
             </select>
-            <p>Sort By:</p>
+          </div>
+            <div class="displayFlex">
+          <p>Type: &nbsp;</p>
+            <select id="type">
+                <option value="all">All</option>
+                <option value="photo">Photo</option>
+                <option value="illustration">Illustration</option>
+                <option value="vector">Vector</option>
+            </select>
+          </div>
+
+
+
+         
+          <div class="displayFlex">
+          <p>Safe Search</p>
+          <input type="checkbox" checked="checked" value="safe" id="safeSearch" name="safeSearch">
+        </div>
+      </div>
+          <div class="sortFlex">
+      
             <label class="sortResults"><img class="filterIcon"src="./img/star.png">
               <input id='popular' type="radio" name="radio" checked="checked">
               <span class="checkmark"></span>
@@ -54,6 +75,7 @@
               <input id='mostViews' type="radio" name="radio">
               <span class="checkmark"></span>
             </label>
+          </div>
             <button id="closeBtn">X</button>
           </div>
 

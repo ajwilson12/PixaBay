@@ -3,11 +3,13 @@ const searchBox = document.getElementById("searchBox");
 const landingWrapper = document.getElementById("landingWrapper");
 const welcomeHeading = document.getElementById("welcomeHeading");
 const searchButton = document.getElementById("searchButton");
+const searchHeading = document.getElementById("searchHeading");
 const settingsButton = document.getElementById("settingsButton");
 const settingsContainer = document.getElementById("settingsContainer");
 const closeBtn = document.getElementById("closeBtn")
 const resultsDiv = document.getElementById("results")
 const perPageElement = document.getElementById("perPage")
+const typeElement = document.getElementById("type")
 const displayImage = document.getElementById('display')
 const alertText = document.getElementById('alert')
 const pagination = document.getElementById('pagination')
@@ -16,6 +18,9 @@ let mostLikes = document.getElementById('mostLikes')
 let mostViews = document.getElementById('mostViews')
 let pageNumber = 1
 let query = ""
+const safeSearch= document.getElementById('safeSearch')
+
+
 
 searchButton.addEventListener('click', function () {
     searchPixaBay()
@@ -49,7 +54,8 @@ async function searchPixaBay(URLpageNumber) {
     console.log(pageNumber)
     query = searchBox.value
     let perPage = perPageElement.value
-    const res = await fetch(`https://pixabay.com/api/?key=${apiKey}&q=${query}&per_page=${perPage}&page=${URLpageNumber}`)
+    let type = typeElement.value
+    const res = await fetch(`https://pixabay.com/api/?key=${apiKey}&q=${query}&image_type=${type}&safesearch=${safeSearch.checked}&per_page=${perPage}&page=${URLpageNumber}`)
     const json = await res.json()
     console.log(json)
     url = res.url
@@ -59,8 +65,11 @@ async function searchPixaBay(URLpageNumber) {
 
     landingWrapper.classList.remove('landingScreen')
     welcomeHeading.style.display="none"
+    searchHeading.style.visibility="visible"
+    searchHeading.style.opacity="1"
 
-console.log(json.totalHits)
+
+
 
 // sorting functions
     if(mostViews.checked){
@@ -148,19 +157,19 @@ function displayData(data) {
         
                     <div class="card">
 
-                    <a class="userName" href="https://pixabay.com/users/${user}" target="_blank"><p class="card-title">${user}</p></a>
-                    
                         <a class="overlay" onclick="insertImage('${String(imgURL)}')" data-bs-toggle="modal" data-bs-target="#exampleModal">
 
                         <img id="zoomIcon" src="./img/enlarge.png" alt="">
                             
-                        <p><img src="./img/view.png" class="imageIcon"alt="">: ${views}
-                            
-                        <img src="./img/like.png" class="imageIcon"alt="">: ${likes}</p>
+                        <span>
+                        <img src="./img/like.png" class="imageIconLikes"alt=""> ${likes} &nbsp; &nbsp;
+                        <img src="./img/view.png" class="imageIconViews"alt=""> ${views}
+                        </span>
                         <img class="userProfilePic"src="${userProfilePic}"></img>
                         </a>
                         
                     <img src="${img}" class="rounded previewImg" alt="...">
+                    <a class="userName" href="https://pixabay.com/users/${user}" target="_blank"><p class="card-title">${user}</p></a>
                 </div>
                         <div class="card-body">
  

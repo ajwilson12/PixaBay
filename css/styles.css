@@ -45,7 +45,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    height: 40vh;
+    height: 30vh;
     animation: fadeIn linear 2s;
 }
 
@@ -60,7 +60,10 @@ h1{
 }
 
 /* search icon */
-
+#searchHeading{
+    opacity: 0;
+    visibility: hidden;
+}
 #searchBox{
     border: none;
     background: whitesmoke;
@@ -155,6 +158,7 @@ h1{
     transform: rotate(120deg);
     transition: transform 0.5s;
 }
+
 #searchIcon{
     width: 20px; 
     transform: rotateY(0deg);
@@ -163,6 +167,77 @@ h1{
 .menuButton:hover > #searchIcon{
     transform: rotateY(180deg);
     transition: transform 0.3s;
+}
+
+/* setting menu buttons */
+.displayFlex{
+    display: flex;
+    align-content: center;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+.sortFlex{
+    display: flex;
+    align-content: center;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#settingsContainer input{
+    margin-left: 3px;
+}
+
+.settingsFirsLine{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    border: #e4e4e4 solid;
+    border-width: 0 0 1px 0;
+}
+
+#settingsContainer{
+    visibility: hidden;
+    align-items: center;
+    justify-content: space-between;
+    opacity: 0;
+    background: #fff;
+    padding: 1px 5px;
+    border-radius: 30px;
+    position:absolute;
+    z-index: 10;
+    margin-top: 300px;
+    font-size: 0.7rem;
+    height: 200px;
+    width: 340px;
+    box-shadow:2px 2px 8px 5px rgba(80, 80, 80, 0.4);
+}
+
+#settingsContainer button{
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: rgb(129, 129, 129);
+}
+
+.filterIcon{
+    width: 20px;
+}
+
+#type,
+#perPage{
+    border: none;
+    height: 100%;
+    border-radius: 5px;
+}
+
+#safeSearch{
+    margin-top: 3px;
 }
 
 
@@ -258,7 +333,18 @@ h1{
 .userName{
     position: absolute;
     z-index: 1;
-    bottom: 5px;
+    top: 8px;
+    opacity: 0;
+    left: 40px;
+}
+
+.userName:hover{
+    opacity: 1;
+    text-decoration: underline;
+}
+
+.overlay:hover ~ .userName{
+    opacity: 1;
 }
 
 .flex{
@@ -291,17 +377,23 @@ h1{
     transition: 0.2s;
 }
 
-.overlay p {
+.overlay span {
     color: whitesmoke;
     position: absolute;
-    bottom: -15px;
+    bottom: 3px;
     right: 10px;
     pointer-events: none;
+    font-size: 0.7rem;
 }
 
-.imageIcon{
-    width: 30px;
+.imageIconViews{
+    width: 20px;
 }
+.imageIconLikes{
+    width: 18px;
+    margin-bottom: 3px;
+}
+
 
 #zoomIcon{
     width:5px;
@@ -355,20 +447,3 @@ h1{
 }
 
 
-#settingsContainer{
-    display: flex;
-    visibility: hidden;
-    align-items: center;
-    justify-content: space-between;
-    opacity: 0;
-    background: #fff;
-    padding: 1px 5px;
-    border-radius: 5px;
-    position:absolute;
-    z-index: 10;
-    min-width: 340px;
-}
-
-.filterIcon{
-    width: 20px;
-}
