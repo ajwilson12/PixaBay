@@ -21,10 +21,18 @@ let query = ""
 const safeSearch= document.getElementById('safeSearch')
 
 
-
+// search button function
 searchButton.addEventListener('click', function () {
     searchPixaBay()
 })
+// hit enter to run functions attached to the searchButton click event
+searchBox.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+     document.getElementById("searchButton").click();
+    }
+});
+
+// animations
 settingsButton.addEventListener('click', function () {
     settingsContainer.style.visibility = "visible"
     settingsContainer.style.transition = "0.3s"
@@ -39,6 +47,7 @@ closeBtn.addEventListener('click', function () {
     settingsButton.style.background = "#fff"
 })
 
+// add class that tells browser that navigation is pinned
 const observer = new IntersectionObserver( 
   ([e]) => e.target.classList.toggle("is-pinned", e.intersectionRatio < 1),
   { threshold: [1] }
@@ -46,7 +55,7 @@ const observer = new IntersectionObserver(
 
 observer.observe(landingWrapper);
 
-
+// search function
 async function searchPixaBay(URLpageNumber) {
     if (query != searchBox.value) {
         pageNumber = 1
@@ -62,7 +71,7 @@ async function searchPixaBay(URLpageNumber) {
     console.log(url)
 
 
-
+// removes landing screen
     landingWrapper.classList.remove('landingScreen')
     welcomeHeading.style.display="none"
     searchHeading.style.visibility="visible"
@@ -79,9 +88,11 @@ async function searchPixaBay(URLpageNumber) {
         sortByHighLikes(json.hits)
     }
 
-
+// clear old searches
     resultsDiv.innerHTML = ''
+  
     
+// alert if seach has no hits
     if (json.totalHits == 0) {
         alertText.innerHTML = `<div class="alert alert-danger" role="alert">
         Sorry, no results found...
@@ -111,16 +122,16 @@ async function searchPixaBay(URLpageNumber) {
 
 function displayPrevBtn() {
     if (pageNumber <= 1){
-       return `<a>Previous</a>`
+       return `<a id="previousBtn">&#171;</a>`
     } else {
-       return `<a href="#" onclick="prevPageBtn(url + pageNumber)">Previous</a>`
+       return `<a id="previousBtn" href="#" onclick="prevPageBtn(url + pageNumber)">&#171;</a>`
     }
 }
 function displayNextBtn(totalHits, perPage) {
     if (pageNumber >= Math.ceil(totalHits / perPage)){
-       return `<a>Next</a>`
+       return `<a id="nextBtn" id="nextBtn">&#187;</a>`
     } else {
-       return `<a href="#" onclick="nextPageBtn(url + pageNumber)">Next</a>`
+       return `<a id="nextBtn" href="#" onclick="nextPageBtn(url + pageNumber)">&#187;</a>`
     }
 }
 
@@ -148,7 +159,7 @@ function displayData(data) {
         let tagSingle = tags.split(", ")
  
         if(userProfilePic == ""){
-            userProfilePic = "../img/noPic.jpg"
+            userProfilePic = "../img/no_pic.jpg"
         }
 
         let imgCard =
@@ -240,14 +251,7 @@ function paginationCurrentPage(i) {
     }
 }
 
-// const people = ['{name: "Fred", likes: 2}', { name: "Ben", likes: 10 }, { name: "Bob", likes: 5 }];
-
-// const result = people.sort(function (a, b) {
-// return a.likes - b.likes
-// })
-
-// console.log(result);
-
+// sorting functions
 
 function sortByHighViews(json){
     json.sort(function (b, a) {
