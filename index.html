@@ -24,7 +24,7 @@
         
         <div class="flex">
           <input id="searchBox" type="text" placeholder="Search..." aria-label="Search Box">
-          <button id="searchButton" type="button" class="btn menuButton"><img id="searchIcon" src="./img/search.png"></img><span>Search</span></button>
+          <a id="searchButton" type="button" href="#"class="btn menuButton"><img id="searchIcon" src="./img/search.png"></img><span>Search</span></a>
           <button id="settingsButton" type="button" class="btn menuButton"><img id="settingsIcon" src="./img/settings-cog.png"></img><span>Settings</span></button>
 
           <div id="settingsContainer">
@@ -50,33 +50,41 @@
                 <option value="vector">Vector</option>
             </select>
           </div>
-
-
-
          
-          <div class="displayFlex">
-          <p>Safe Search</p>
+         
+          <div id="tooltipAgeLimit" class="displayFlex">
+          <p><img id="ageLimitIcon" src="./img/age-limit.png" Safe Search></p>
           <input type="checkbox" checked="checked" value="safe" id="safeSearch" name="safeSearch">
+          <span id="tooltipText">Remove Adult content</span>
         </div>
       </div>
-          <div class="sortFlex">
+
       
+          <div class="sortFlex">
+            <div class="sortResults"><p>Sort By:</p></div>
+
+            
             <label class="sortResults"><img class="filterIcon"src="./img/star.png">
               <input id='popular' type="radio" name="radio" checked="checked">
               <span class="checkmark"></span>
+              <p class="toolTipPop">Popular</p>
             </label>
           
             <label class="sortResults"><img class="filterIcon"src="./img/like.png">
               <input id='mostLikes' type="radio" name="radio">
               <span class="checkmark"></span>
+              <p class="toolTip">Most Likes</p>
             </label>
           
-            <label class="sortResults"><img class="filterIcon"src="./img/view.png"> 
+            <label class="sortResults"><img class="filterIconViews"src="./img/view.png"> 
               <input id='mostViews' type="radio" name="radio">
               <span class="checkmark"></span>
+              <p class="toolTip">Most Views</p>
             </label>
           </div>
-            <button id="closeBtn">X</button>
+
+            <button id="closeBtn"><p><span>x</span></p></button>
+
           </div>
 
 

@@ -21,13 +21,22 @@ let query = ""
 const safeSearch= document.getElementById('safeSearch')
 
 
+safeSearch.addEventListener('click', function(){
+if(safeSearch.checked){
+    document.getElementById('ageLimitIcon').src = "./img/age-limit.png"
+} else {
+    document.getElementById('ageLimitIcon').src = "./img/age-limit-open.png"
+}
+
+})
+
 // search button function
 searchButton.addEventListener('click', function () {
     searchPixaBay()
 })
 // hit enter to run functions attached to the searchButton click event
-searchBox.addEventListener("keyup", function(event) {
-    if (event.keyCode === 13) {
+searchBox.addEventListener("keyup", function(KeyboardEvent) {
+    if (KeyboardEvent.code == "Enter") {
      document.getElementById("searchButton").click();
     }
 });
@@ -159,7 +168,7 @@ function displayData(data) {
         let tagSingle = tags.split(", ")
  
         if(userProfilePic == ""){
-            userProfilePic = "../img/no_pic.jpg"
+            userProfilePic = "./img/no_pic.jpg"
         }
 
         let imgCard =
