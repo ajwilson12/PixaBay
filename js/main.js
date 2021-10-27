@@ -179,11 +179,11 @@ function displayData(data) {
 
                         <a class="overlay" onclick="insertImage('${String(imgURL)}')" data-bs-toggle="modal" data-bs-target="#exampleModal">
 
-                        <img id="zoomIcon" src="./img/enlarge.png" alt="">
+                        <img id="zoomIcon" src="./img/enlargeWhite.png" alt="">
                             
                         <span>
-                        <img src="./img/like.png" class="imageIconLikes"alt=""> ${likes} &nbsp; &nbsp;
-                        <img src="./img/view.png" class="imageIconViews"alt=""> ${views}
+                        <img src="./img/likeWhite.png" class="imageIconLikes"alt=""> ${likes} &nbsp; &nbsp;
+                        <img src="./img/viewWhite.png" class="imageIconViews"alt=""> ${views}
                         </span>
                         <img class="userProfilePic"src="${userProfilePic}"></img>
                         </a>
