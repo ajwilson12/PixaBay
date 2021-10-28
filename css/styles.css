@@ -243,24 +243,31 @@ h1{
     top: -15px;
     left: -15px;
     position: absolute;  
-    width: 40px;
-    height: 40px;
+
+
     cursor: pointer;
     text-align: center;
     padding: 0;
 }
 
-#closeBtn p {
+#closeBtn .span-one {
     background: #fff;
     border-radius: 50%;
     box-shadow:1px 1px 8px 4px rgba(0, 0, 0, 0.2);
     padding-bottom: 5px;
     margin: 0;
+   padding: 5px 20px;
 }
 
-#closeBtn p:hover{
+#closeBtn .span-one:hover{
     background-color: whitesmoke;
     color: black;
+}
+
+.span-two{
+    position: absolute;
+    left: 14px;
+    top: -3px;
 }
 
 #settingsContainer input{

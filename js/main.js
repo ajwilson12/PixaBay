@@ -101,7 +101,7 @@ async function searchPixaBay(URLpageNumber) {
     resultsDiv.innerHTML = ''
   
     
-// alert if seach has no hits
+// alert if search has no hits
     if (json.totalHits == 0) {
         alertText.innerHTML = `<div class="alert alert-danger" role="alert">
         Sorry, no results found...
