@@ -20,6 +20,10 @@ let pageNumber = 1;
 let query = "";
 const safeSearch= document.getElementById('safeSearch');
 
+window.addEventListener('load', function(){
+    let lastQuery = localStorage.getItem("query");
+    searchBox.value = lastQuery;
+})
 
 safeSearch.addEventListener('click', function(){
 if(safeSearch.checked){
@@ -73,6 +77,7 @@ async function searchPixaBay(URLpageNumber) {
     }
     console.log(pageNumber);
     query = searchBox.value;
+    localStorage.setItem('query', query);
     let perPage = perPageElement.value;
     let type = typeElement.value;
     const res = await fetch(`https://pixabay.com/api/?key=${apiKey}&q=${query}&image_type=${type}&safesearch=${safeSearch.checked}&per_page=${perPage}&page=${URLpageNumber}`);
